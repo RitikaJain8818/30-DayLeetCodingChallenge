@@ -1,0 +1,40 @@
+class FirstUnique {
+
+    LinkedHashMap<Integer,Integer> map;
+    public FirstUnique(int[] nums) {
+        map=new LinkedHashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(map.containsKey(nums[i])){
+                map.put(nums[i],map.get(nums[i])+1);
+            }else{
+                map.put(nums[i],1);
+            }
+        }
+        //System.out.println(map);
+    }
+    
+    public int showFirstUnique() {
+        for(Map.Entry entry:map.entrySet()){
+            if((int)entry.getValue()==1){
+                return (int)entry.getKey();
+            }
+        }
+        return -1;
+    }
+    
+    public void add(int value) {
+        if(map.containsKey(value)){
+            map.put(value,map.get(value)+1);
+        }else{
+            map.put(value,1);
+        }
+        //System.out.println(map);
+    }
+}
+
+/**
+ * Your FirstUnique object will be instantiated and called as such:
+ * FirstUnique obj = new FirstUnique(nums);
+ * int param_1 = obj.showFirstUnique();
+ * obj.add(value);
+ */

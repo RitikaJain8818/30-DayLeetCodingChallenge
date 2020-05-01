@@ -1,0 +1,36 @@
+class Solution {
+    public String stringShift(String s, int[][] shift) {
+        StringBuilder sb=new StringBuilder();
+        sb.append(s);
+        int count=0;
+        for(int i=0;i<shift.length;i++){
+            int d=shift[i][0];
+            int k=shift[i][1];
+            k=k%s.length();
+            if(d==0){
+                count=count-k;
+            }else{
+                count=count+k;
+            }
+        }
+        String ss="";
+        if(count==0){
+            return sb.toString();
+        }else if(count<0){
+            count=Math.abs(count);
+            count=count%(s.length());
+            ss=s.substring(0,count);
+            sb.delete(0,count);
+            sb.append(ss);
+        }else{
+            count=count%(s.length());
+            StringBuilder sbb=new StringBuilder();
+            ss=s.substring(0,s.length()-count);
+            sbb.append(s.substring(s.length()-count));
+            //sbb.reverse();
+            sbb.append(ss);
+            sb=sbb;
+        }
+        return sb.toString();
+    }
+}

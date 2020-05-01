@@ -1,0 +1,28 @@
+class Solution {
+    public boolean isHappy(int n) {
+        while(true){
+            if(n==1){
+                return true;
+            }
+            int k=getPowerSum(n);
+            if(k==1){
+                return true;
+            }else if(k==4){
+                return false;
+            }
+            n=k;
+        }
+        //return false;
+    }
+    public int getPowerSum(int n){
+        int result=0;
+        while(n!=0){
+            int rem=n%10;
+            result+=rem*rem;
+            n=n/10;
+        }
+        return result;
+    }
+}
+
+//Link to Question: https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/528/week-1/3284/

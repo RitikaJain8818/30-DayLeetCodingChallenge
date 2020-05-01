@@ -1,0 +1,53 @@
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+        int count=stones.length;
+        while(count>1){
+            int fmax=firstMax(stones);
+            int smax=secondMax(stones,fmax);
+            //System.out.println(stones[fmax]+" "+stones[smax]);
+            if(stones[fmax]==stones[smax]){
+                count=count-2;
+                stones[fmax]=0;
+                stones[smax]=0;
+            }else{
+                count=count-1;
+                if(stones[fmax]<stones[smax]){
+                    stones[smax]=stones[smax]-stones[fmax];
+                    stones[fmax]=0;
+                }
+                else{
+                    stones[fmax]=stones[fmax]-stones[smax];
+                    stones[smax]=0;
+                }
+            }   
+        }
+        for(int i=0;i<stones.length;i++){
+            if(stones[i]!=0){
+                return stones[i];
+            }
+        }
+        return 0;
+    }
+    public int firstMax(int[] stones){
+        int max=Integer.MIN_VALUE;
+        int maxi=0;
+        for(int i=0;i<stones.length;i++){
+            if(max<stones[i]){
+                 max=stones[i];
+                 maxi=i;
+            }
+        }
+        return maxi;
+    }
+    public int secondMax(int[] stones,int firstMax){
+        int max=Integer.MIN_VALUE;
+        int maxi=0;
+        for(int i=0;i<stones.length;i++){
+            if(max<stones[i]&&i!=firstMax){
+                 max=stones[i];
+                 maxi=i;
+            }
+        }
+        return maxi;
+    }
+}

@@ -1,0 +1,32 @@
+class Solution {
+    public int maximalSquare(char[][] matrix) {
+        if(matrix.length==0)
+            return 0;
+        int r=matrix.length;
+        int c=matrix[0].length;
+        int[][] aux=new int[r][c];
+        for(int i=0;i<r;i++){
+            aux[i][0]=Character.getNumericValue(matrix[i][0]);
+        }
+        for(int i=0;i<c;i++){
+            aux[0][i]=Character.getNumericValue(matrix[0][i]);
+        }
+        for(int i=1;i<r;i++){
+            for(int j=1;j<c;j++){
+                if(matrix[i][j]=='1'){
+                    aux[i][j]=Math.min(aux[i][j-1],Math.min(aux[i-1][j],aux[i-1][j-1]))+1;
+                }else
+                    aux[i][j]=0;
+            }
+        }
+        int maxl=aux[0][0];
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                if(maxl<aux[i][j]){
+                    maxl=aux[i][j];
+                }
+            }
+        }
+        return maxl*maxl;
+    }
+}

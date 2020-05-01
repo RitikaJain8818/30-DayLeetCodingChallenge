@@ -1,0 +1,27 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length<2)
+            return 0;
+        int total=0;
+        int curr=prices[0];
+        for(int i=1;i<prices.length;i++){
+            while(i<prices.length&&prices[i]<curr){
+                curr=prices[i];
+                i++;
+            }
+            int ans=Integer.MIN_VALUE;
+            while(i<prices.length&&prices[i]>curr&&ans<prices[i]-curr){
+                ans=prices[i]-curr;
+                i++;
+            }
+            if(ans==Integer.MIN_VALUE)
+                total+=0;
+            else
+                total+=ans;
+            if(i==prices.length)
+                break;
+            curr=prices[i];
+        }
+        return total;
+    }
+}
